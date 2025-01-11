@@ -1,4 +1,5 @@
 import { calculateHeroScores } from './js/hudService.js';
+import {getAllHeroes} from "./js/stratzApi.js";
 
 // Форма: відправка запиту
 const form = document.getElementById('queryForm');
@@ -48,40 +49,44 @@ form.addEventListener('submit', async function (e) {
     try {
         // Виклик функції обчислення
         const heroScores = await calculateHeroScores(playerId, position, bracketIds, apiKey);
-
+        const allheroes = await getAllHeroes(apiKey)
         // Відображення таблиці
-        renderTable(heroScores);
+        renderTable(heroScores,allheroes);
     } catch (error) {
         alert(`Error: ${error.message}`);
     }
 });
 
 // Функція відображення таблиці
-function renderTable(data) {
+function renderTable(data,heroes) {
+
     const tableBody = document.querySelector('#resultsTable tbody');
     tableBody.innerHTML = ''; // Очищення таблиці
 
     if (data.length === 0) {
         const row = document.createElement('tr');
-        row.innerHTML = '<td colspan="4">No data available</td>';
+        row.innerHTML = '<td colspan="11">No data available</td>';
         tableBody.appendChild(row);
         return;
     }
 
-    data.forEach(hero => {
+    data.forEach((hero, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${hero.heroId}</td>
-            <td>${(hero.winrate * 100).toFixed(2)}%</td>
-            <td>${hero.matchCount}</td>
-            <td>${hero.score.toFixed(2)}</td>
+            <td>${index + 1}</td>
+            <td style="line-height: 0;">
+                <img src="https://cdn.dota2.com/apps/dota2/images/heroes/${heroes[hero.hero_id].shortName}_full.png" alt="${heroes[hero.hero_id].shortName}" style="width: 80px; height: auto;margin:-8px;">
+            </td>
+            <td>${hero.winrate ? (hero.winrate * 100).toFixed(2) + '%' : '-'}</td>
+            <td>${hero.matchCount || '-'}</td>
+            <td>${hero.my_winrate ? (hero.my_winrate * 100).toFixed(2) + '%' : '-'}</td>
+            <td>${hero.my_matchCount || '-'}</td>
+            <td>${hero.my_imp || '-'}</td>
+            <td>${hero.parsed_balanced_imp || '-'}</td>
+            <td>${hero.lane_outcome || '-'}</td>
+            <td>${hero.score ? hero.score.toFixed(2) : '-'}</td>
+            <td>${hero.your_gain || '-'}</td>
         `;
         tableBody.appendChild(row);
     });
 }
-
-// Приклад функції calculateHeroScores (має бути реалізована окремо)
-// function calculateHeroScores(playerId, position, bracketIds, apiKey) {
-//     // Реалізація вашої логіки для отримання та обчислення даних
-//     // Повертає масив об'єктів з полями heroId, winrate, matchCount, score
-// }

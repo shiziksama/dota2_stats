@@ -136,13 +136,16 @@ export const getAllHeroes = async (apiKey) => {
                 'Authorization': `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                query: "{ heroStats { stats { heroId } } }",
+                query: "{constants {heroes {id,shortName}}}",
             }),
         });
 
         const data = await response.json();
-        const result = data?.data?.heroStats?.stats.map(hero => hero.heroId) || [];
-
+        const result=data?.data?.constants?.heroes.reduce((acc, item) => {
+            acc[item.id] = item;
+            return acc;
+        }, {});
+        //const result = data?.data?.heroStats?.stats.map(hero => hero.heroId) || [];
         cache.set(cacheKey, result); // Збереження в кеш
         return result;
     } catch (error) {

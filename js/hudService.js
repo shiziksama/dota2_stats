@@ -41,6 +41,7 @@ export async function calculateHeroScores(playerId, position, bracketIds, apiKey
     result = Object.values(result).map(hero => {
         const oneBadGame = hero.my_imp < 0 && hero.my_matchCount < 3;
         let myScore = 1;
+        hero.parsed_balanced_imp=hero.my_imp-avgImp;
 
         if (hero.my_imp && !oneBadGame) {
             myScore = 1 + (hero.my_imp - avgImp) / 100 / 2;
