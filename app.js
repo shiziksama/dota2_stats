@@ -21,6 +21,7 @@ window.addEventListener('load', () => {
             input.checked = true;
         }
     });
+    form.dispatchEvent(new Event('submit'));
 });
 
 form.addEventListener('submit', async function (e) {

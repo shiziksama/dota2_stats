@@ -10,47 +10,54 @@
 <h1>Hero Statistics</h1>
 <form id="queryForm">
     <label for="player_id">Player ID:</label>
-    <input type="text" id="player_id" name="player_id" required>
-    <br><br>
-    <label for="role">Role:</label>
-    <select id="role" name="role" required>
-        <option value="POSITION_1">Carry</option>
-        <option value="POSITION_2">Mid</option>
-        <option value="POSITION_3">Offlane</option>
-        <option value="POSITION_4">Support</option>
-        <option value="POSITION_5">Soft Support</option>
-    </select>
+    <input type="text" id="player_id" name="player_id">
     <br><br>
     <label for="api_key">API Key:</label>
     <input type="text" id="api_key" name="api_key" required>
     <br><br>
-    <label for="brackets">Brackets:</label>
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+        <option value="POSITION_1">POSITION_1</option>
+        <option value="POSITION_2">POSITION_2</option>
+        <option value="POSITION_3">POSITION_3</option>
+        <option value="POSITION_4">POSITION_4</option>
+        <option value="POSITION_5">POSITION_5</option>
+    </select>
+    <br><br>
     <div id="bracketsContainer" class="checkbox-container">
         <span>Skill Brackets:</span>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="HERALD">HERALD
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="GUARDIAN">GUARDIAN
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="CRUSADER">CRUSADER
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="ARCHON">ARCHON
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="LEGEND">LEGEND
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="ANCIENT">ANCIENT
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="DIVINE">DIVINE
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" name="bracket_id[]" value="IMMORTAL">IMMORTAL
-        </label>
+        <div>
+            <input type="checkbox" id="HERALD" name="bracket_id[]" value="HERALD">
+            <label class="checkbox-label" for="HERALD">HERALD</label>
+        </div>
+        <div>
+            <input type="checkbox" id="GUARDIAN" name="bracket_id[]" value="GUARDIAN">
+            <label class="checkbox-label" for="GUARDIAN">GUARDIAN</label>
+        </div>
+        <div>
+            <input type="checkbox" id="CRUSADER" name="bracket_id[]" value="CRUSADER">
+            <label class="checkbox-label" for="CRUSADER">CRUSADER</label>
+        </div>
+        <div>
+            <input type="checkbox" id="ARCHON" name="bracket_id[]" value="ARCHON">
+            <label class="checkbox-label" for="ARCHON">ARCHON</label>
+        </div>
+        <div>
+            <input type="checkbox" id="LEGEND" name="bracket_id[]" value="LEGEND">
+            <label class="checkbox-label" for="LEGEND">LEGEND</label>
+        </div>
+        <div>
+            <input type="checkbox" id="ANCIENT" name="bracket_id[]" value="ANCIENT">
+            <label class="checkbox-label" for="ANCIENT">ANCIENT</label>
+        </div>
+        <div>
+            <input type="checkbox" id="DIVINE" name="bracket_id[]" value="DIVINE">
+            <label class="checkbox-label" for="DIVINE">DIVINE</label>
+        </div>
+        <div>
+            <input type="checkbox" id="IMMORTAL" name="bracket_id[]" value="IMMORTAL">
+            <label class="checkbox-label" for="IMMORTAL">IMMORTAL</label>
+        </div>
     </div>
     <button type="submit">Get Statistics</button>
 </form>
